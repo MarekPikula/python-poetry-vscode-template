@@ -1,0 +1,58 @@
+[tool.poetry]
+name = "fixme-project-name"
+version = "0.1.0"
+description = "FIXME project descripion."
+authors = ["Marek Pikuła <marek@serenitycode.dev>"]
+maintainers = ["Marek Pikuła <marek@serenitycode.dev>"]
+license = "MIT"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Operating System :: OS Independent",
+]
+repository = "https://github.com/MarekPikula/fixme"
+# documentation = "https://fixme.readthedocs.io"
+readme = "README.md"
+packages = [
+    {include = "fixme_project_name"},
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+click = "^8.1.7"
+loguru = "^0.7.2"
+
+[tool.poetry.extras]
+
+[tool.poetry.scripts]
+fixme = "fixme_project_name.__main__:main"
+
+[tool.poetry.group.lint.dependencies]
+black = "^23.9.1"
+mypy = "^1.5.1"
+isort = "^5.12.0"
+ruff = "^0.0.292"
+pydocstyle = "^6.3.0"
+pylint = "^3.0.1"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.2"
+pylint-pytest = "^1.1.2"
+coveralls = "^3.3.1"
+pytest-cov = "^4.1.0"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint.main]
+extension-pkg-whitelist = ["pydantic"]
+load-plugins = ["pylint_pydantic"]
+
+[tool.pylint."messages control"]
+disable = ["raw-checker-failed", "bad-inline-option", "locally-disabled", "file-ignored", "suppressed-message", "useless-suppression", "deprecated-pragma", "use-symbolic-message-instead", "fixme"]

@@ -1,0 +1,141 @@
+name: build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types:
+      - published
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  build-devcontainer:
+    name: Build VS Code devcontainer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and run Dev Container task
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ghcr.io/marekpikula/python-poetry-vscode-template/devcontainer
+          cacheFrom: ghcr.io/marekpikula/python-poetry-vscode-template/devcontainer
+          push: always
+
+  test:
+    name: Run Python tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Poetry
+        run: pipx install poetry
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "poetry"
+
+      - name: Install dependencies
+        run: poetry install --only main,dev,test
+
+      - name: Test
+        run: |
+            poetry run pytest tests/ --cov=fixme_project_name --cov-report=term \
+                --cov-report=xml:output/coverage/cov.xml \
+                --cov-report=html:output/coverage/html
+
+      - name: Coveralls
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "repo_token: ${GITHUB_TOKEN}" > .coveralls.yml
+          poetry run coveralls --service=github
+
+  pre-commit:
+    name: Run pre-commit lint tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Poetry
+      run: pipx install poetry
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+        cache: "poetry"
+
+    - name: Execute pre-commit tests
+      uses: pre-commit/action@v3.0.0
+
+  build-docs:
+    if: false
+    name: Build documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Poetry
+        run: pipx install poetry
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Install dependencies
+        run: poetry install --only main,doc
+      - name: Build docs
+        run: poetry run make -C docs/ html
+      - name: Upload the built documentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: documentation
+          path: docs/_build/
+
+  build-publish:
+    needs:
+      - test
+      # - build-docs
+      - pre-commit
+    if: github.ref == 'refs/heads/main'
+    name: Build source distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Poetry
+        run: pipx install poetry
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Build the package
+        run: poetry build
+      - name: Upload the built package
+        uses: actions/upload-artifact@v3
+        with:
+          name: package
+          path: dist/*
+      - if: false
+        name: Publish the package
+        run: |
+          poetry config http-basic.pypi __token__ ${{ secrets.PYPI_PASSWORD }}
+          poetry publish --skip-existing
