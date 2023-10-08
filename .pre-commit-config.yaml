@@ -1,19 +1,19 @@
 repos:
   - repo: https://github.com/python-poetry/poetry
-    rev: "1.4.0"
+    rev: "1.6.0"
     hooks:
       - id: poetry-check
       - id: poetry-lock
   - repo: https://github.com/ambv/black
-    rev: 23.3.0
+    rev: "23.9.1"
     hooks:
       - id: black
   - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
+    rev: "5.12.0"
     hooks:
       - id: isort
   - repo: https://github.com/pycqa/pydocstyle
-    rev: 6.3.0
+    rev: "6.3.0"
     hooks:
       - id: pydocstyle
   - repo: local
@@ -24,10 +24,10 @@ repos:
         language: system
         types: [python]
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.0.265"
+    rev: "v0.0.292"
     hooks:
       - id: ruff
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.2.0"
+    rev: "v1.5.1"
     hooks:
       - id: mypy
