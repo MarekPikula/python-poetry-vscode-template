@@ -29,6 +29,9 @@
         "--cov-report=html:output/coverage/html"
     ],
     "python.testing.unittestEnabled": false,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
     // "yaml.schemas": {
     //     "fixme_project_name/configuration.schema.json": [
     //         "config.example.yaml",
