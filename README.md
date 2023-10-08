@@ -1,5 +1,6 @@
 [![build](https://github.com/MarekPikula/python-poetry-vscode-template/workflows/build/badge.svg)](https://github.com/MarekPikula/python-poetry-vscode-template/actions?query=workflow%3Abuild+branch%3Amain)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/fixme.svg)](https://pypi.org/project/fixme)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # Python + Poetry + VS Code (devcontainer) template
 
