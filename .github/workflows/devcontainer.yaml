@@ -3,6 +3,9 @@ name: VS Code Devcontainer
 on:
   push:
     branches: [ main ]
+    paths:
+      - .github/workflows/devcontainer.yaml
+      - .devcontainer/**
   schedule:
     - cron: "0 0 * * 0"
 
