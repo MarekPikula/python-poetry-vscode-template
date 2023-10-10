@@ -30,8 +30,10 @@
     ],
     "python.testing.unittestEnabled": false,
     "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
     },
+    "python.formatting.provider": "none",
     // "yaml.schemas": {
     //     "fixme_project_name/configuration.schema.json": [
     //         "config.example.yaml",
