@@ -1,4 +1,4 @@
-[![build](https://github.com/MarekPikula/python-poetry-vscode-template/workflows/build/badge.svg)](https://github.com/MarekPikula/python-poetry-vscode-template/actions?query=workflow%3Abuild+branch%3Amain)
+[![Python](https://github.com/MarekPikula/python-poetry-vscode-template/actions/workflows/python.yaml/badge.svg)](https://github.com/MarekPikula/python-poetry-vscode-template/actions/workflows/python.yaml)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/fixme.svg)](https://pypi.org/project/fixme)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
