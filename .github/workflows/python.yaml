@@ -1,4 +1,4 @@
-name: build
+name: Python
 
 on:
   push:
@@ -12,26 +12,6 @@ on:
     - cron: "0 0 * * 0"
 
 jobs:
-  build-devcontainer:
-    name: Build VS Code devcontainer
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and run Dev Container task
-        uses: devcontainers/ci@v0.3
-        with:
-          imageName: ghcr.io/marekpikula/python-poetry-vscode-template/devcontainer
-          cacheFrom: ghcr.io/marekpikula/python-poetry-vscode-template/devcontainer
-          push: always
-
   test:
     name: Run Python tests
     runs-on: ubuntu-latest
