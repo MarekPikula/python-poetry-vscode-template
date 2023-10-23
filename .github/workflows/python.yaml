@@ -64,6 +64,9 @@ jobs:
         python-version: "3.11"
         cache: "poetry"
 
+    - name: Install dependencies
+      run: poetry install --only lint
+
     - name: Execute pre-commit tests
       uses: pre-commit/action@v3.0.0
 
