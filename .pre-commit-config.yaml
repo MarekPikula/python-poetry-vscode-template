@@ -29,3 +29,7 @@ repos:
     rev: "v0.12.0"
     hooks:
       - id: markdownlint
+
+ci:
+  skip:
+    - poetry-lock  # Due to errors during PyPI connection.
