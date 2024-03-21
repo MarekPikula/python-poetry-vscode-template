@@ -42,4 +42,9 @@
     //         "config.json"
     //     ]
     // }
+    "cSpell.words": [
+        "isort",
+        "markdownlint",
+        "pydocstyle"
+    ],
 }

@@ -13,14 +13,14 @@ opinionated and represents personal taste of the author.
     - *FIXME* (also lowercase),
     - *python-poetry-vscode-template*
 
-2. Adjust the Python version in the following files:
+1. Adjust the Python version in the following files:
     - .devcontainer/Dockerfile
     - pyproject.toml
     - .github/workflows/build.yaml
 
-3. Add `PYPI_PASSWORD` secret if you want to publish to PyPI and enable the
+1. Add `PYPI_PASSWORD` secret if you want to publish to PyPI and enable the
    workflow step.
 
-4. Set *Workflow permissions* to *Read and write permissions* in
+1. Set *Workflow permissions* to *Read and write permissions* in
    *Actions→General* section in project settings. Needed for devcontainer image
    build.
