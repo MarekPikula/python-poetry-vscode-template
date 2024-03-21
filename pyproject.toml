@@ -27,22 +27,22 @@ loguru = "^0.7.2"
 fixme = "fixme_project_name.__main__:main"
 
 [tool.poetry.group.lint.dependencies]
-black = "^23.9.1"
-mypy = "^1.5.1"
-isort = "^5.12.0"
+black = "^23.12.1"
+mypy = "^1.9.0"
+isort = "^5.13.2"
 ruff = "^0.0.292"
 pydocstyle = "^6.3.0"
-pylint = "^3.0.1"
-pylint-pydantic = "^0.3.0"
+pylint = "^3.1.0"
+pylint-pydantic = "^0.3.2"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^7.4.2"
-pylint-pytest = "^1.1.2"
+pytest = "^7.4.4"
+pylint-pytest = "^1.1.7"
 coveralls = "^3.3.1"
 pytest-cov = "^4.1.0"
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^3.4.0"
+pre-commit = "^3.5.0"
 
 [build-system]
 requires = ["poetry-core"]
